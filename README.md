@@ -40,10 +40,19 @@ computed: {
   },
 },
 
-// step 4. Call `this.validateAll()` to validate target list whenever you want.
+// step 4. Call `this.validator_validate()` to validate target tuple whenever you want.
 methods: {
-  onInputChange() {
-    this.validateAll()
+  onInputChange(item) {
+    this.validator_validate(item)
+  },
+
+  // or calling `this.validator_validateAll()` to validate whole list which return boolean
+  submit() {
+      const isFormValid = this.validator_validateAll() // validateAll also return a boolean additionally
+      if (!isFormValid) {
+          return
+      }
+      // ...
   },
 },
 ```
@@ -64,7 +73,7 @@ methods: {
         <input
             type="number"
             v-model="item.qty"
-            @change="onInputChange"
+            @change="onInputChange(item)"
         >
 
         <!-- Enjoy your handy error status by accessing property `validator_state[${id}]`. -->

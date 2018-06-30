@@ -15,7 +15,7 @@
           <input
             type="number"
             v-model="item.qty"
-            @change="onInputChange"
+            @change="onInputChange(item)"
           >
           <label>
             Quantity:
@@ -33,6 +33,7 @@
         </td>
       </tr>
     </table>
+    <button @click="submit">submit</button>
   </div>
 </template>
 
@@ -90,8 +91,17 @@ export default {
   },
   methods: {
     // step 4. Call `this.validateAll()` to validate target list whenever you want.
-    onInputChange() {
-      this.validateAll()
+    onInputChange(item) {
+      this.validator_validate(item)
+    },
+
+    // or calling `this.validator_validateAll()` to validate whole list
+    submit() {
+      const isFormValid = this.validator_validateAll() // `validator_validateAll` return a boolean additionally
+      if (!isFormValid) {
+        return
+      }
+      // ...
     },
   },
 }
