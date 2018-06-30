@@ -27,10 +27,10 @@ const rule2 = {
 
 // step 2. Apply your rule objects to array `validator_rules`.
 created() {
-    this.validator_rules = [
-      rule1,
-      rule2,
-    ]
+  this.validator_rules = [
+    rule1,
+    rule2,
+  ]
 },
 
 // step 3. Set your target list as computed property `validator_list` to be the portal of validator
@@ -48,7 +48,7 @@ methods: {
 
   // or calling `this.validator_validateAll()` to validate whole list which return boolean
   submit() {
-      const isFormValid = this.validator_validateAll() // validateAll also return a boolean additionally
+      const isFormValid = this.validator_validateAll() // validateAll return a boolean additionally
       if (!isFormValid) {
           return
       }
@@ -67,24 +67,27 @@ methods: {
     :key="item.id"
   >
     <td>
-        <label>
-            Quantity:
-        </label>
-        <input
-            type="number"
-            v-model="item.qty"
-            @change="onInputChange(item)"
-        >
+      <label>
+        Quantity:
+      </label>
+      <input
+        type="number"
+        v-model="item.qty"
+        @change="onInputChange(item)"
+      >
 
-        <!-- Enjoy your handy error status by accessing property `validator_state[${id}]`. -->
-        <span
-            v-show="validator_state[item.id].qty.error"
-            class="error"
-            >
-            {{ validator_state[item.id].qty.errorMsg }}
-        </span>
+      <!-- Enjoy your handy error status by accessing property `validator_state[${id}]`. -->
+      <span
+        v-show="validator_state[item.id].qty.error"
+        class="error"
+      >
+        {{ validator_state[item.id].qty.errorMsg }}
+      </span>
     </td>
   </tr>
+
+  <!-- submit -->
+  <button @click="submit">submit</button>
 
   <!-- ... -->
 </template>
